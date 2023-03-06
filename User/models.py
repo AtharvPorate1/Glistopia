@@ -13,6 +13,7 @@ class UserModel(models.Model):
     IsStudent = models.BooleanField()
     IsServiceProvider = models.BooleanField()
     lastLogin = models.DateTimeField("login date time ") #every time the user logins date and time should be overwritten in the date and time section
+    profilePic = models.ImageField(upload_to=f"uploads/User/{UserId}")
     
 
     class Meta:
@@ -25,7 +26,7 @@ class UserModel(models.Model):
 
 #Student model 
 class Student(models.Model):
-    StudentId = models.ForeignKey(UserModel)
+    StudentId = models.ForeignKey(UserModel , on_delete=models.CASCADE)
     college = models.TextField()
     location = models.TextField() #location college
     SearchingFor = models.TextField() #service searching for

@@ -1,38 +1,49 @@
 from django.db import models
-
+from User import models as md
+from aenum import NamedConstant
 # Create your models here.
+
+        
+    
 
 #model for storing mess data
 class MessData(models.Model):
+    
     messImage = models.ImageField(upload_to=f"uploads/Mess/messImage/") #posts should be saved according to their post ids = "<location><public><postno>"
     menuImage = models.ImageField(upload_to=f"uploads/Mess/menuImage/") #same comment as above
     messName = models.TimeField()
     contactNo = models.IntegerField(max_length=10)
     
+    
+    location = models.TextField()
+    #method for accepting value for subscription model
+
+#mess images
+class MessImages():
+    mess = models.ForeignKey(MessData , on_delete=models.CASCADE)
+    pictures = models.ImageField(upload_to="%(app_label)s_%(class)s_%(mess)s")
+    class Meta :
+        db_table = 'mess images'
+        
+
+#mess subscription model
+class Subscription(models.Model):
+    messId = models.OneToOneField(MessData , on_delete=models.CASCADE)
     onceAday = models.IntegerField() #rates for one time food for day for month
     twiceAday = models.IntegerField() #rates for two time food for day for month
-
-    def charges(self):
-        return [self.onceAday , self.twiceAday]
-
-    #choices for subscription field
-    class subtype(models.IntegerChoices):
-        onceAday : int
-        twiceAday : int
-        def __init__(self ):
-            self.onceAday = MessData.charges[0]
-            self.twiceAday =MessData.charges[1]
+   
+    
             
 
 
-    subscription = models.IntegerField(choices=subtype.choices)
-    location = models.TextField()
+    
     
 
 
 #model for rating and review of Mess food per user
 class ratingAndReview(models.Model):
     MessId = models.ForeignKey(MessData , on_delete=models.CASCADE)
-    Rating = models.IntegerField(max=10)
+    Rating = models.IntegerField()
     Reviews = models.TextField()
+    UserId = models.OneToOneField(md.UserModel,on_delete=models.CASCADE)
     
