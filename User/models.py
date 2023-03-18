@@ -1,21 +1,25 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-#model for user
-class UserModel(models.Model):
-    
-    first_name = models.TextField()
-    last_name = models.TextField()
-    email = models.EmailField()
-    mobile = models.IntegerField(max_length=10)
-    UserId = models.AutoField(primary_key=True)
-    IsStudent = models.BooleanField()
-    IsServiceProvider = models.BooleanField()
-    lastLogin = models.DateTimeField("login date time ") #every time the user logins date and time should be overwritten in the date and time section
-    profilePic = models.ImageField(upload_to=f"uploads/User/{UserId}")
-    
 
+users = (
+    ('s' ,'student'),
+    ('m','food provider'),
+    ('h','housing provider')
+)
+#model for user
+class UserModel(AbstractUser):
+    typeOfUser = models.CharField(max_length=1,choices=users)
+    username = models.CharField(max_length=191,blank=True , primary_key=False ,unique=True)
+    mobile = models.IntegerField(blank=True)
+    UserId = models.AutoField(primary_key=True)
+    
+    
+    
+    profilePic = models.ImageField(upload_to=f"uploads/User/{UserId}")
+    subscribedTo = models.ManyToManyField('Mess.Subscription') #obj.subscribedTo.add(sampleObj : Subscription) method to add object to many to many model field
+    
     class Meta:
         db_table = "user"
 
@@ -69,6 +73,9 @@ class ServiceProvider(models.Model):
     serviceProvided = models.TextField()
     serviceId = models.ForeignKey(Services , on_delete=models.CASCADE)
 
+    #declaring abstract for temporary
+    class Meta :
+        abstract = True
 
 def user_directory_path(instance ):
     return 'user_{}'.format(instance.UserModel.UserId)
@@ -84,6 +91,10 @@ class AccomodationProvider(models.Model):
     deposit = models.IntegerField()
     postedOn = models.DateField(auto_now_add=True)
 
+    #declaring abstract for temporary
+    class Meta :
+        abstract = True
+
 #model for storing mess service owner data
 class MessProvider():
     userId = models.ForeignKey(UserModel , on_delete=models.CASCADE)
@@ -92,6 +103,8 @@ class MessProvider():
     onceADay = models.IntegerField() #mess rates for one time mess facility in a day for a month 
     twiceADay = models.IntegerField() #mess rates for twice a day for a month
     orderRate = models.IntegerField() #normal order rates for food
-
+    #declaring abstract for temporary
+    class Meta :
+        abstract = True
 
     

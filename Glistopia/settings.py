@@ -38,10 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'Mess',
     'User',
     'Housing',
 ]
+
+AUTH_USER_MODEL = 'User.UserModel'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,7 +62,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'glistopia-frontend/build')
+            #os.path.join(BASE_DIR, 'glistopia-frontend/build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -124,7 +127,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    'glistopia-frontend/build/static'
+    #'glistopia-frontend/build/static'
 ]
 
 # Default primary key field type

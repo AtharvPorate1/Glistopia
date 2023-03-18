@@ -10,6 +10,7 @@ class HousingModels(models.Model):
     Rent = models.IntegerField()
     Deposit = models.IntegerField()
     AccomodationType = models.TextField(choices=Accomchoices.choices)
+    profile = models.ImageField(upload_to="%(app_label)s_%(class)s_%(pk)s/")
 
 class HouseImages():
     House = models.ForeignKey(HousingModels , on_delete=models.CASCADE)
