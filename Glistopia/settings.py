@@ -136,3 +136,8 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = "/home/jayesh/Glistopia/Glistopia/media"
+
+EMAIL_HOST='localhost'
+#EMAIL_PORT='587'
+EMAIL_HOST_USER = 'jayeshhire96'
+EMAIL_HOST_PASSWORD = 'Jayso@123'
