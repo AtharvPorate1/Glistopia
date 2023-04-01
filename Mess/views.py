@@ -51,3 +51,10 @@ class MessDetail(APIView):
             snippet = self.get_object(pk)
             snippet.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class MessTest(APIView):
+      
+      def get(self , request):
+            return JsonResponse({'name' : 'Jayesh' ,'status' : '200' ,'function' : 'test'})
+      
