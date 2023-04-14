@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from serializers import UserSerializer
-from models import UserModel
+from User.serializers import UserSerializer
+from User.models import UserModel
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -14,7 +14,7 @@ class UserList(APIView):
     def get(self, request, format=None):
 
         users = UserModel.objects.all()
-        serializer = UserSerializer(users,many=)
+        serializer = UserSerializer(users,many=False)
         return Response(serializer.data)
     
 #getting information about a particular user
