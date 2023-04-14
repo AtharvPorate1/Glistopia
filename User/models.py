@@ -10,7 +10,7 @@ users = (
 )
 #model for user
 class UserModel(AbstractUser):
-    
+    #typeOfUser = models.CharField(max_length=1,choices=users)
     username = models.CharField(max_length=191,blank=True , primary_key=False ,unique=True)
     mobile = models.IntegerField(blank=True)
     UserId = models.AutoField(primary_key=True)

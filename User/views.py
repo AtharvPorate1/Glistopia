@@ -14,7 +14,7 @@ class UserList(APIView):
     def get(self, request, format=None):
 
         users = UserModel.objects.all()
-        serializer = UserSerializer(users,many=False)
+        serializer = UserSerializer(users,many=True)
         return Response(serializer.data)
     
 #getting information about a particular user
