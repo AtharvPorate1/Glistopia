@@ -32,13 +32,19 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+   'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'Mess',
+    'User',
+    'Housing',
 ]
+
+AUTH_USER_MODEL = 'User.UserModel'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -56,7 +62,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'glistopia-frontend/build')
+            #os.path.join(BASE_DIR, 'glistopia-frontend/build')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -79,7 +85,7 @@ WSGI_APPLICATION = 'Glistopia.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
 
@@ -121,10 +127,12 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    'glistopia-frontend/build/static'
+    #'glistopia-frontend/build/static'
 ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = "/home/jayesh/Glistopia/Glistopia/media"
